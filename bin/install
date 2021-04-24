@@ -19,10 +19,12 @@ install_ko() {
   local platform=$(uname | tr '[:upper:]' '[:lower:]')
 
   case $(uname -m) in
-    x86_64)
+    amd64|x86_64)
       local arch=amd64
-    aarch64)
+      ;;
+    arm64|aarch64)
       local arch=arm64
+      ;;
   esac
 
   local filename="kubelogin_${platform}_${arch}.zip"
