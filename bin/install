@@ -16,21 +16,18 @@ install_ko() {
   local bin_install_path="$install_path/bin"
   local bin_path="${bin_install_path}/kubelogin"
 
-  case $(uname | tr '[:upper:]' '[:lower:]') in
-    linux*)
-      local platform=linux_amd64
-      ;;
-    darwin*)
-      local platform=darwin_amd64
-      ;;
-    *)
-      local platform=notset
-      ;;
+  local platform=$(uname | tr '[:upper:]' '[:lower:]')
+
+  case $(uname -m) in
+    x86_64)
+      local arch=amd64
+    aarch64)
+      local arch=arm64
   esac
 
-  local filename="kubelogin_${platform}"
+  local filename="kubelogin_${platform}_${arch}.zip"
   local download_url="$(get_download_url $filename)"
-  local tmp_bin_path="${TMPDIR}/${filename}.zip"
+  local tmp_bin_path="${TMPDIR}/${filename}"
 
   echo "Downloading kubelogin from ${download_url}"
   mkdir -p $TMPDIR
@@ -52,7 +49,7 @@ install_ko() {
 
 get_download_url() {
   local filename="$1"
-  echo "https://github.com/int128/kubelogin/releases/download/v${version}/${filename}.zip"
+  echo "https://github.com/int128/kubelogin/releases/download/v${version}/${filename}"
 }
 
 install_ko $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
