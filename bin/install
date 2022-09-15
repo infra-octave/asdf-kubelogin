@@ -27,7 +27,7 @@ install_ko() {
 		;;
 	esac
 
-	local filename="kubelogin_${platform}_${arch}.zip"
+	local filename="kubelogin-${platform}-${arch}.zip"
 	local download_url="$(get_download_url $filename)"
 	local tmp_dir="${TMPDIR}/kubelogin"
 	local tmp_archive_path="${tmp_dir}/${filename}"
@@ -41,7 +41,7 @@ install_ko() {
 
 	echo "Moving bin to ${bin_path}"
 	mkdir -p $bin_install_path
-	cp $tmp_dir/kubelogin $bin_path
+	cp "$tmp_dir/bin/${platform}-${arch}/kubelogin" $bin_path
 
 	echo "Cleaning tmps..."
 	rm -r $tmp_dir
@@ -52,7 +52,7 @@ install_ko() {
 
 get_download_url() {
 	local filename="$1"
-	echo "https://github.com/int128/kubelogin/releases/download/v${version}/${filename}"
+	echo "https://github.com/Azure/kubelogin/releases/download/v${version}/${filename}"
 }
 
 install_ko $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
