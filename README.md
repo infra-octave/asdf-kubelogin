@@ -7,7 +7,7 @@
 ## Install
 
 ```
-asdf plugin-add kubelogin https://github.com/zasdaym/asdf-kubelogin.git
+asdf plugin-add kubelogin https://github.com/infra-octave/asdf-kubelogin.git
 ```
 
 ## Use
