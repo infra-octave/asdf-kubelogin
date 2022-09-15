@@ -41,7 +41,7 @@ install_ko() {
 
 	echo "Moving bin to ${bin_path}"
 	mkdir -p $bin_install_path
-	cp "$tmp_dir/bin/${platform}-${arch}/kubelogin" $bin_path
+	cp "$tmp_dir/bin/${platform}_${arch}/kubelogin" $bin_path
 
 	echo "Cleaning tmps..."
 	rm -r $tmp_dir
